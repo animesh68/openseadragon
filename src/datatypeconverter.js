@@ -459,6 +459,14 @@ OpenSeadragon.DataTypeConverter = class DataTypeConverter {
             ctx.canvas.width = 0;
             ctx.canvas.height = 0;
         });
+        /**
+         * Free up ImageBitmap native and GPU memory.
+         */
+        this.learnDestroy("imageBitmap", bmp => {
+            if (bmp && typeof bmp.close === 'function') {
+                bmp.close();
+            }
+        });
     }
 
     /**
